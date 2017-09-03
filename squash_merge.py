@@ -4,6 +4,8 @@ import sys
 from subprocess import check_call, check_output
 from argparse import ArgumentParser
 
+SQUASH_COMMIT_MSG = "merge(squash) branch"
+
 #------------------------------------------------------------------------------
 
 def parse_commandline():
@@ -27,7 +29,6 @@ def main():
     check_call('git checkout %s' % args.branch2, shell=True)
 
     # check if already merged
-    SQUASH_COMMIT_MSG = "merge(squash) branch"
     last_commit_msg = get_last_commit_msg()
     if last_commit_msg.startswith(SQUASH_COMMIT_MSG):
         last_merged_branch = last_commit_msg.split()[-1]
